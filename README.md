@@ -1,5 +1,7 @@
 # iterators
 
+[![CI](https://github.com/Kronuz/iterators/actions/workflows/ci.yml/badge.svg)](https://github.com/Kronuz/iterators/actions/workflows/ci.yml)
+
 Lightweight, lazy iteration adaptors extracted from
 [Xapiand](https://github.com/Kronuz/Xapiand). No allocation, no ranges-v3 -- just
 small forward-iterator wrappers you drop into a range-for.
