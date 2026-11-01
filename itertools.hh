@@ -43,11 +43,17 @@ class Transform {
 	I _end;
 
 public:
-	class iterator : public std::iterator<std::forward_iterator_tag, typename I::value_type, typename I::difference_type, typename I::pointer, typename I::reference> {
+	class iterator {
 		F& _fn;
 		I _it;
 
 	public:
+		using iterator_category = std::forward_iterator_tag;
+		using value_type = typename I::value_type;
+		using difference_type = typename I::difference_type;
+		using pointer = typename I::pointer;
+		using reference = typename I::reference;
+
 		iterator(F& fn, I it) : _fn(fn), _it(it) { }
 		bool operator!=(const iterator& other) const {
 			return _it != other._it;
@@ -97,12 +103,18 @@ class Chain {
 	I2 _end2;
 
 public:
-	class iterator : public std::iterator<std::forward_iterator_tag, typename I2::value_type, typename I2::difference_type, typename I2::pointer, typename I2::reference> {
+	class iterator {
 		I1 _it1;
 		I1 _end1;
 		I2 _it2;
 
 	public:
+		using iterator_category = std::forward_iterator_tag;
+		using value_type = typename I2::value_type;
+		using difference_type = typename I2::difference_type;
+		using pointer = typename I2::pointer;
+		using reference = typename I2::reference;
+
 		iterator(I1 it1, I1 end1, I2 it2) :
 			_it1{it1}, _end1{end1}, _it2{it2} { }
 

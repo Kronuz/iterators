@@ -6,6 +6,24 @@ entries are dated.
 
 ## 2026-11-01
 
+### Fixed
+
+- The iterators of `transform` and `chain` derived from `std::iterator`, deprecated since
+  C++17: clang with libc++ and GCC 12 or newer warn on every include of `itertools.hh`
+  (`-Wdeprecated-declarations`). They declare the five member typedefs instead
+  (`iterator_category` as `std::forward_iterator_tag`, and `value_type`,
+  `difference_type`, `pointer` and `reference` from the source iterator, the second one for
+  `chain`), the same types the base supplied, so `std::iterator_traits` reads the same
+  values.
+
+### Tests
+
+- `iterators_test` builds with `-Wall -Wextra -Wdeprecated -Wdeprecated-declarations
+  -Werror` on GCC and Clang, so a deprecated base fails the build (the old header fails it
+  on every CI job: clang with libc++ and libstdc++ 14 report
+  `'iterator<std::forward_iterator_tag, int>' is deprecated`), and `static_assert`s check
+  the five traits of both iterators.
+
 ### Changed
 
 - The README follows the family README standard: the description as its first sentence,

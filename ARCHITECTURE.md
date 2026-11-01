@@ -22,7 +22,8 @@ directly with a range-for.
 
 ## Notes / invariants
 
-- `itertools.hh` still derives its iterators from the deprecated `std::iterator` base —
-  verbatim from Xapiand, left as-is to keep the extraction faithful. Modernizing it (to
-  explicit member typedefs) is a deliberate change, not a drive-by.
+- The adaptors' iterators declare the five member types `std::iterator_traits` reads
+  (`iterator_category`, `value_type`, `difference_type`, `pointer`, `reference`), copied from
+  the source iterator (the second one for `chain`), and derive from nothing: `std::iterator`
+  is deprecated since C++17 and warns. The test target builds with `-Werror -Wdeprecated`.
 - Consumers include `itertools.hh` and/or `reversed.hh` by name; keep those filenames.
